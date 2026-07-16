@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Core premium style system variables */
+:root {
+  --bg: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --border: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --accent: #2563EB;
+  --accent-glow: rgba(37, 99, 235, 0.08);
+  --success: #059669;
+  --success-glow: rgba(5, 150, 105, 0.1);
+  --grid-dot: rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="dark"] {
+  --bg: #0A0A0C;
+  --bg-card: #121215;
+  --border: #1F1F24;
+  --text-primary: #F9FAFB;
+  --text-secondary: #9CA3AF;
+  --accent: #3B82F6;
+  --accent-glow: rgba(59, 130, 246, 0.08);
+  --success: #10B981;
+  --success-glow: rgba(16, 185, 129, 0.1);
+  --grid-dot: rgba(255, 255, 255, 0.02);
+}
+
+/* Globals & transitions */
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Premium dot-grid background overlay */
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--grid-dot) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Accessibility: focus indicator style */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
