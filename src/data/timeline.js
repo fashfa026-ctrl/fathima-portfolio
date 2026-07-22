@@ -19,7 +19,9 @@ export const timeline = {
       issuer: "Full-Stack Development Bootcamps",
       date: "2026",
       details: "Building REST APIs, session database modeling, and React client state synchronization.",
-      link: "https://github.com/fashfa026-ctrl"
+      links: [
+        { label: "View Credential ↗", url: "/e-certificates/Javascript.jpeg" }
+      ]
     },
     {
       id: "cert-oop",
@@ -27,7 +29,9 @@ export const timeline = {
       issuer: "SLIATE HNDIT Coursework",
       date: "2025",
       details: "Object-oriented program systems, JDBC integrations, and MySQL normalization.",
-      link: "https://github.com/fashfa026-ctrl"
+      links: [
+        { label: "View Credential ↗", url: "/e-certificates/Java.jpeg" }
+      ]
     },
     {
       id: "cert-python",
@@ -35,7 +39,10 @@ export const timeline = {
       issuer: "Programming Study Platform",
       date: "2024",
       details: "Basic structures, algorithms, and CLI-based scripting configurations.",
-      link: "https://github.com/fashfa026-ctrl"
+      links: [
+        { label: "View Credential 1 ↗", url: "/e-certificates/python.jpeg" },
+        { label: "View Credential 2 ↗", url: "/e-certificates/LearnPython.jpeg" }
+      ]
     }
   ]
 };

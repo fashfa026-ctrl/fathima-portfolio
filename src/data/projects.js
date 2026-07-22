@@ -8,7 +8,7 @@ export const projects = [
     status: "Completed flagship MERN project",
     isCompleted: true,
     github: "https://github.com/fashfa026-ctrl",
-    demo: null,
+    demo: "https://jobportal-5b93.vercel.app/",
     role: "Full-Stack Developer",
     scope: "Academic Project / Final-Year Build",
     problem: "Recruiters struggle with fragmented pipelines, while applicants face a black-box experience with no visibility into their application tracking state.",

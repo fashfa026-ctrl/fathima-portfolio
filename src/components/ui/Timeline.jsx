@@ -89,15 +89,18 @@ export const Timeline = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-[var(--border)]/35 flex justify-end">
-                  <a 
-                    href={cert.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-xs font-semibold text-[var(--accent)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1 font-mono"
-                  >
-                    View Credential ↗
-                  </a>
+                <div className="pt-4 mt-4 border-t border-[var(--border)]/35 flex justify-end gap-4">
+                  {cert.links && cert.links.map((lnk, lIdx) => (
+                    <a 
+                      key={lIdx}
+                      href={lnk.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-[var(--accent)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1 font-mono"
+                    >
+                      {lnk.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             ))}
