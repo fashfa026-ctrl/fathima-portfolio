@@ -15,40 +15,40 @@ export const timeline = {
   certifications: [
     {
       id: "cert-js",
-      title: "JavaScript Programming",
-      issuer: "Programming Study Platform",
-      date: "2026",
-      details: "Comprehensive focus on modern JavaScript (ES6+), DOM manipulation, and asynchronous fetch APIs.",
+      title: "Javascript Programming",
+      issuer: "Cursa e-Learning Platform",
+      date: "June 2026",
+      details: "Completed a structured 5-hour course covering core JavaScript syntax, variables, conditional logic, and functions.",
       links: [
         { label: "View Credential ↗", url: "/e-certificates/Javascript.jpeg" }
       ]
     },
     {
       id: "cert-oop",
-      title: "Java Object-Oriented Programming",
-      issuer: "SLIATE HNDIT Coursework",
-      date: "2025",
-      details: "Object-oriented program systems, JDBC integrations, and MySQL normalization.",
+      title: "Java Programming",
+      issuer: "Cursa e-Learning Platform",
+      date: "June 2026",
+      details: "Completed a 22-hour coursework program covering OOP concepts, control flows, and standard libraries.",
       links: [
         { label: "View Credential ↗", url: "/e-certificates/Java.jpeg" }
       ]
     },
     {
       id: "cert-python-1",
-      title: "Python Programming",
-      issuer: "Programming Study Platform",
-      date: "2024",
-      details: "Basic structures, algorithms, and CLI-based scripting configurations.",
+      title: "Python 101 for Data Science",
+      issuer: "Cognitive Class (IBM)",
+      date: "June 2026",
+      details: "Course powered by IBM Developer Skills Network covering Python basics, data structures, and data analysis fundamentals.",
       links: [
         { label: "View Credential ↗", url: "/e-certificates/python.jpeg" }
       ]
     },
     {
       id: "cert-python-2",
-      title: "Learn Python Certification",
-      issuer: "Programming Study Labs",
-      date: "2024",
-      details: "Foundational Python syntax, scripting logic, and console application structures.",
+      title: "Learn Python",
+      issuer: "Cursa e-Learning Platform",
+      date: "June 2026",
+      details: "Completed a 13-hour course covering Python operations, programming syntax, and console execution logic.",
       links: [
         { label: "View Credential ↗", url: "/e-certificates/LearnPython.jpeg" }
       ]
