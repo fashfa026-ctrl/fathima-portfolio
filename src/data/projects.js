@@ -76,77 +76,81 @@ export const projects = [
   },
   {
     id: "hotel",
-    title: "Hotel Management System",
-    category: "Coursework Project",
-    description: "An offline desktop system designed to handle guest reservations, vacant room grid management, and billing invoicing processing.",
-    stack: ["Java", "OOP", "MySQL", "C#"],
+    title: "Hotel Management System Modernization",
+    category: "Modernization Case Study",
+    description: "A comprehensive migration of a legacy Java Swing desktop application into a decoupled Spring Boot web application using JPA and an embedded database.",
+    stack: ["Spring Boot", "Spring Data JPA", "Java", "H2 Database", "REST API"],
     status: "Completed academic desktop project",
     isCompleted: true,
     github: "https://github.com/fashfa026-ctrl",
     demo: null,
     role: "Sole Developer",
-    scope: "HNDIT Coursework Project",
-    problem: "Manual booking led to double-allocation of rooms, slower guest check-ins, and fragmented invoicing records.",
-    objective: "To design a secure local desktop system providing structured room status logs and automatic invoice outputs.",
-    targetUsers: "Hotel desk receptionists and administrative managers.",
+    scope: "Legacy Desktop to Web Migration Project",
+    problem: "Legacy Swing client suffered from absolute path dependency issues, NullPointerException failures on resource loads, and required heavy manual SQL setup.",
+    objective: "To modernize the legacy codebase into a web-based REST service with decoupled layers, embedded file databases, and automated portable scripting.",
+    targetUsers: "Hotel desk receptionists and administrative managers using standard web browsers.",
     techDetails: {
-      frontend: ["Java Swing GUI layout components", "C# Windows Forms layouts"],
-      backend: ["Java OOP runtime modules", "ADO.NET SQL connectivity libraries"],
-      database: ["MySQL Database Server"],
-      tools: ["NetBeans IDE", "Visual Studio Community", "Git version control"]
+      frontend: ["HTML5", "CSS3 (Dark Theme Layout)", "Vanilla JavaScript SPA"],
+      backend: ["Java", "Spring Boot web framework", "Spring Data JPA (Hibernate)"],
+      database: ["H2 Embedded Database (File-based, zero setup for development)"],
+      tools: ["Git & GitHub", "Portable Apache Maven configurations", "PowerShell automation scripts"]
     },
     features: [
       {
-        title: "Interactive Room Grid",
-        description: "Renders a visual grid displaying vacant, occupied, and maintenance states of hotel rooms."
+        title: "Legacy Path Resolution",
+        description: "Refactored broken absolute classpaths from original systems to relative project dependencies inside local directories."
       },
       {
-        title: "Guest Billing Calculator",
-        description: "Automatically computes final costs based on room package type, occupancy days, and custom tax rules."
+        title: "Decoupled REST API Contract",
+        description: "Engineered clean controllers for Auth, Rooms, Customers, and Invoicing, replacing direct UI-embedded JDBC queries."
       },
       {
-        title: "CRUD Guest Manager",
-        description: "Stores and retrieves national ID cards (NIC), check-in durations, and primary phone contacts."
+        title: "Automated Build Tooling",
+        description: "Created a PowerShell script that dynamically downloads Maven and copies assets on-demand, resolving runtime NullPointerExceptions."
       }
     ],
     architecture: {
-      client: "Desktop Swing/WinForms client capturing user events and inputs.",
-      server: "Object-oriented program handling business rules, inheritance objects, and SQL execution.",
-      database: "MySQL Server engine storing normalized relational tables."
+      client: "Single Page Application (SPA) dispatching HTTP REST calls to server API endpoints.",
+      server: "Spring Boot layered stack executing controller endpoints, JPA model operations, and transactional calculations.",
+      database: "Embedded H2 engine storing database files locally in the root directory (jdbc:h2:file:./data/hoteldb)."
     },
     dbDesign: [
       {
-        name: "Guests Table",
-        description: "Stores guest identification details.",
-        fields: ["guest_id (INT, PK)", "first_name (VARCHAR)", "last_name (VARCHAR)", "nic_number (VARCHAR)", "phone (VARCHAR)"]
+        name: "Users Table",
+        description: "Stores admin credentials and security details.",
+        fields: ["id (Long, PK)", "username (VARCHAR)", "password (VARCHAR)", "securityQuestion (VARCHAR)", "securityAnswer (VARCHAR)"]
       },
       {
         name: "Rooms Table",
-        description: "Holds room types and current status.",
-        fields: ["room_number (INT, PK)", "type (VARCHAR: Single | Double | Suite)", "price_per_day (DECIMAL)", "status (VARCHAR: Vacant | Occupied | Maintenance)"]
+        description: "Manages room types and status records.",
+        fields: ["roomNumber (Long, PK)", "bedType (VARCHAR)", "coolingType (VARCHAR)", "price (Double)", "isBooked (Boolean)"]
       },
       {
-        name: "Bookings Table",
-        description: "Manages check-in transactions.",
-        fields: ["booking_id (INT, PK)", "guest_id (INT, FK)", "room_number (INT, FK)", "check_in_date (DATE)", "check_out_date (DATE)", "total_price (DECIMAL)"]
+        name: "Customers Table",
+        description: "Logs current guest bookings.",
+        fields: ["id (Long, PK)", "name (VARCHAR)", "phone (VARCHAR)", "email (VARCHAR)", "roomNumber (Long, FK)", "checkInDate (Timestamp)", "checkOutDate (Timestamp)"]
       }
     ],
     challenges: [
       {
-        challenge: "Double Booking Overlap Prevention",
-        solution: "Utilized MySQL transaction isolation controls and write blocks, ensuring a room's status cannot be occupied in overlapping date ranges."
+        challenge: "Absolute Dependency Resolution",
+        solution: "Moved hardcoded library JAR paths from the developer's original PC to a relative lib_jars/ classpath folder, allowing instant project compilation."
       },
       {
-        challenge: "Object Relational Interface translation",
-        solution: "Established a clean Data Access Object (DAO) pattern in Java, isolating SQL queries from frontend event logic."
+        challenge: "Swing Resource Loading NPE Crash",
+        solution: "Created build automation scripts to pre-copy assets to build outputs, ensuring assets load correctly under standard IDE runners."
+      },
+      {
+        challenge: "Zero-Setup Database Development",
+        solution: "Configured an embedded file-based H2 database URL and implemented CommandLineRunner seeding to populate default room logs on startup."
       }
     ],
     outcomeTitle: "Project Outcome",
     outcome: [
-      "Completed as HNDIT coursework program.",
-      "Designed object-oriented abstractions for guests, rooms, and invoicing.",
-      "Prevented double-booking race conditions using transactional checks.",
-      "Interfaced Java graphical layouts with MySQL relational schemas."
+      "Successfully modernized legacy Swing desktop app into a modular web REST API.",
+      "Decoupled configuration dependencies using relative classpath mappings.",
+      "Engineered zero-setup portability using embedded file-based H2 database and Maven PowerShell scripts.",
+      "Implemented decoupled Controller-Service-Repository architecture in Spring Boot."
     ]
   },
   {
