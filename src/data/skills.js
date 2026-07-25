@@ -16,6 +16,17 @@ export const skills = {
   ],
   tools: [
     { name: "Git & GitHub", level: "Version control & collaborative branch flows" },
-    { name: "VS Code", level: "Primary development workspace environment" }
+    { name: "VS Code", level: "Primary development workspace environment" },
+    { name: "Postman", level: "API testing & endpoint validation" },
+    { name: "NetBeans", level: "Java development" },
+    { name: "Visual Studio", level: "C# development" }
+  ],
+  deployment: [
+    { name: "Vercel", level: "Frontend & serverless deployment" }
+  ],
+  aiAssistedDevelopment: [
+    { name: "Claude AI", level: "Structured, phase-by-phase development workflow" },
+    { name: "ChatGPT", level: "Problem-solving & documentation support" },
+    { name: "Google Gemini", level: "Research & quick reference" }
   ]
 };

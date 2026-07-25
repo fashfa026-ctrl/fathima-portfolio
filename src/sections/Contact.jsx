@@ -18,7 +18,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 border-t border-[var(--border)]">
+    <section id="contact" className="pt-16 pb-24 border-t border-[var(--border)]">
       <div className="max-w-5xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           

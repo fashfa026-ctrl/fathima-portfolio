@@ -59,7 +59,7 @@ export const Timeline = () => {
         {/* SECTION 2 - CERTIFICATIONS */}
         <div>
           <SectionTitle title="Certifications" eyebrow="Credentials & Studies" className="mb-8" />
-          <div className="grid grid-cols-1 gap-4 h-full">
+          <div className="grid grid-cols-1 gap-4">
             {certifications.map((cert) => (
               <div 
                 key={cert.id}

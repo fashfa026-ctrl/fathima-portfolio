@@ -14,11 +14,11 @@ export const timeline = {
   },
   certifications: [
     {
-      id: "cert-mern",
-      title: "MERN Stack Development",
-      issuer: "Full-Stack Development Bootcamps",
+      id: "cert-js",
+      title: "JavaScript Programming",
+      issuer: "Programming Study Platform",
       date: "2026",
-      details: "Building REST APIs, session database modeling, and React client state synchronization.",
+      details: "Comprehensive focus on modern JavaScript (ES6+), DOM manipulation, and asynchronous fetch APIs.",
       links: [
         { label: "View Credential ↗", url: "/e-certificates/Javascript.jpeg" }
       ]
@@ -34,14 +34,23 @@ export const timeline = {
       ]
     },
     {
-      id: "cert-python",
+      id: "cert-python-1",
       title: "Python Programming",
       issuer: "Programming Study Platform",
       date: "2024",
       details: "Basic structures, algorithms, and CLI-based scripting configurations.",
       links: [
-        { label: "View Credential 1 ↗", url: "/e-certificates/python.jpeg" },
-        { label: "View Credential 2 ↗", url: "/e-certificates/LearnPython.jpeg" }
+        { label: "View Credential ↗", url: "/e-certificates/python.jpeg" }
+      ]
+    },
+    {
+      id: "cert-python-2",
+      title: "Learn Python Certification",
+      issuer: "Programming Study Labs",
+      date: "2024",
+      details: "Foundational Python syntax, scripting logic, and console application structures.",
+      links: [
+        { label: "View Credential ↗", url: "/e-certificates/LearnPython.jpeg" }
       ]
     }
   ]

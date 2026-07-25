@@ -29,11 +29,20 @@ export const About = () => {
           <div className="space-y-6">
             
             {/* Skill categories */}
-            {Object.entries(skills).map(([category, list]) => (
-              <div key={category} className="space-y-2">
-                <h4 className="text-xs font-bold tracking-wider text-[var(--text-primary)] uppercase font-mono">
-                  {category}
-                </h4>
+            {Object.entries(skills).map(([category, list]) => {
+              const categoryNames = {
+                frontend: "Frontend",
+                backend: "Backend",
+                database: "Database",
+                tools: "Tools",
+                deployment: "Deployment",
+                aiAssistedDevelopment: "AI-Assisted Development"
+              };
+              return (
+                <div key={category} className="space-y-2">
+                  <h4 className="text-xs font-bold tracking-wider text-[var(--text-primary)] uppercase font-mono">
+                    {categoryNames[category]?.toUpperCase() || category.toUpperCase()}
+                  </h4>
                 <div className="flex flex-wrap gap-2">
                   {list.map((skill) => (
                     <div 
@@ -47,7 +56,8 @@ export const About = () => {
                   ))}
                 </div>
               </div>
-            ))}
+            );
+          })}
 
           </div>
         </div>
