@@ -155,96 +155,80 @@ export const projects = [
   },
   {
     id: "icecream",
-    title: "Ice Cream Shop Web Application",
+    title: "Ice Cream Delights",
     category: "Coursework Web App",
-    description: "A coursework web application currently under development using PHP and MySQL. The project allows customers to browse ice cream products, place orders, and enables administrators to manage products and inventory while expanding my backend development skills.",
+    description: "A fully functional, multi-page e-commerce web application featuring dedicated portals for customers (users) and sellers (admins) to manage workflows.",
     stack: ["PHP", "MySQL", "HTML5", "CSS3", "JavaScript"],
-    status: "Currently under development",
-    isCompleted: false,
+    status: "Completed coursework project",
+    isCompleted: true,
     github: "https://github.com/fashfa026-ctrl",
     demo: null,
     role: "Sole Developer",
-    scope: "Ongoing academic coursework project",
-    problem: "Developing a client-facing ordering interface and inventory catalog to learn core backend scripting logic.",
-    objective: "To construct a lightweight PHP ordering web application with database storage and admin CRUD inventory access, being refined as part of academic coursework.",
-    targetUsers: "Online customers ordering ice cream, and shop managers updating product stock.",
+    scope: "Academic Coursework Refactoring & Build",
+    problem: "The legacy codebase contained plaintext MD5 authentication, lack of file upload validation, hardcoded server paths (C:\\xampp\\htdocs\\...), and critical database bugs.",
+    objective: "To secure authentication, implement file upload defense rules, prevent SQL injection via PDO prepared statements, and resolve duplicate constant warnings.",
+    targetUsers: "Ice cream customers browsing catalogs, and sellers managing inventory orders.",
     techDetails: {
-      frontend: ["HTML5", "CSS3", "JavaScript"],
-      backend: ["PHP"],
-      database: ["MySQL"],
-      tools: ["XAMPP", "phpMyAdmin"]
+      frontend: ["HTML5 & Vanilla CSS3", "JavaScript (ES6+)", "SwiperJS & SweetAlert", "Boxicons & FontAwesome"],
+      backend: ["PHP (OOP & PDO - PHP Data Objects)"],
+      database: ["MySQL (Normalized relational schema)"],
+      tools: ["XAMPP Local Server Stack", "Git & GitHub"]
     },
     features: [
       {
-        title: "Product Listing",
-        description: "Displays product descriptions, prices, and live stock quantities directly pulled from MySQL."
+        title: "Product Listing & Cart",
+        description: "Enables customers to browse menus, add/remove items dynamically from wishlist and shopping carts, and place final orders."
       },
       {
-        title: "Shopping Cart & Ordering",
-        description: "Maintains customer selection list across pages and records customer order placement on checkout."
+        title: "Admin Inventory Manager",
+        description: "Equips sellers with product CRUD operations, color-coded low-stock warnings, and registration accounts tracking."
       },
       {
-        title: "Admin Product Management",
-        description: "Enables administrators to perform CRUD operations, manage product details, and configure inventories."
+        title: "Secured File Upload Defense",
+        description: "Enforces MIME type checking, size limitations, and extension validators on product upload forms."
       }
     ],
     architecture: {
-      client: "Browser client rendering DOM pages and performing basic input validation checks.",
-      server: "PHP application executing on Apache Server dynamically rendering page layouts based on query parameters.",
-      database: "MySQL Database storing products, orders, and customer entries."
+      client: "Multi-page browser client rendering custom typography styles, SwiperJS banners, and password toggle Boxicons.",
+      server: "PHP application server compiling OOP classes, checking sessions, and executing PDO transactions.",
+      database: "MySQL Database engine storing normalized relational tables connected via foreign key dependencies."
     },
     dbDesign: [
       {
+        name: "Users & Sellers Tables",
+        description: "Manages profile logins and password verification salts.",
+        fields: ["id (INT, PK)", "name (VARCHAR)", "email (VARCHAR, unique)", "password (Hashed String)", "user_type (VARCHAR)"]
+      },
+      {
         name: "Products Table",
-        description: "Stores flavor catalogs, descriptions, and prices.",
-        fields: ["product_id (INT, PK)", "flavor_name (VARCHAR)", "price (DECIMAL)", "stock_quantity (INT)", "description (TEXT)", "category_id (INT, FK)"]
+        description: "Holds inventory numbers and stock warnings indicators.",
+        fields: ["id (INT, PK)", "name (VARCHAR)", "price (DECIMAL)", "image (VARCHAR)", "product_details (TEXT)", "status (VARCHAR)"]
       },
       {
-        name: "Categories Table",
-        description: "Groups products by type.",
-        fields: ["category_id (INT, PK)", "category_name (VARCHAR)"]
-      },
-      {
-        name: "Customers Table",
-        description: "Stores guest registration details.",
-        fields: ["customer_id (INT, PK)", "name (VARCHAR)", "email (VARCHAR)", "phone (VARCHAR)"]
-      },
-      {
-        name: "Orders Table",
-        description: "Stores customer transaction details.",
-        fields: ["order_id (INT, PK)", "customer_id (INT, FK)", "order_date (DATETIME)", "total_price (DECIMAL)"]
-      },
-      {
-        name: "Order Items Table",
-        description: "Stores order items metadata.",
-        fields: ["order_item_id (INT, PK)", "order_id (INT, FK)", "product_id (INT, FK)", "quantity (INT)"]
+        name: "Cart & Wishlist Tables",
+        description: "Stores selected product links before checkouts.",
+        fields: ["id (INT, PK)", "user_id (INT, FK -> Users)", "product_id (INT, FK -> Products)", "price (DECIMAL)", "qty (INT)"]
       }
     ],
     challenges: [
       {
-        challenge: "Managing stock updates after orders",
-        solution: "Implementing PHP checkout queries that decrement product stock quantities immediately when an order transaction is recorded."
+        challenge: "Unsecured Authentication & Upload Vulnerability",
+        solution: "Replaced insecure MD5 storage with native password_hash() and password_verify() APIs, and integrated strict MIME type size checks on product uploads."
       },
       {
-        challenge: "Maintaining relational database consistency",
-        solution: "Configuring relational constraints with cascading updates in MySQL, preventing orphan booking records when products get altered."
+        challenge: "Broken Navigation & Absolute Local Pathing",
+        solution: "Resolved hardcoded developer PC paths to relative directories, and corrected spelling redirects (e.g. view_oder.php to view_order.php)."
       },
       {
-        challenge: "Handling CRUD validations",
-        solution: "Integrating client-side JavaScript regex checkers alongside server-side PHP validation checks to block empty inputs."
-      },
-      {
-        challenge: "Organizing reusable PHP pages",
-        solution: "Refactoring layout blocks into modular header and footer templates included dynamically using PHP require constructs."
+        challenge: "Product Editing Image Deletion Bug",
+        solution: "Re-engineered editing logic to ensure existing images persist in server directories if no new image upload is specified."
       }
     ],
-    outcomeTitle: "Current Progress",
+    outcomeTitle: "Project Outcome",
     outcome: [
-      "Core PHP and MySQL architecture completed.",
-      "CRUD functionality implemented.",
-      "Product and inventory management developed.",
-      "Continuing development and feature refinement.",
-      "Expanding backend development skills through coursework."
+      "100% Functional Application: Resolved all database errors, broken Boxicons links, and layout redirection bugs.",
+      "Improved Security Posture: Transitioned from plaintext data to industry-standard hashed passwords and secure file uploads.",
+      "Polished User Experience: Developed dynamic SwiperJS promotional banners and JavaScript show/hide password toggles."
     ]
   }
 ];
