@@ -23,41 +23,50 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Tech Stack Grid */}
+        {/* Tech Stack Grid - Option B (Balanced with Details) */}
         <div>
           <SectionTitle title="Tech Stack" eyebrow="Technologies & Tools" className="mb-6" />
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Skill categories */}
             {Object.entries(skills).map(([category, list]) => {
               const categoryNames = {
-                languages: "Programming Languages",
+                languages: "Languages",
                 frontend: "Frontend",
                 backend: "Backend",
-                desktop: "Desktop Development",
+                desktop: "Desktop Dev",
                 database: "Databases",
-                tools: "Tools & Technologies"
+                tools: "Tools & Platforms"
               };
               return (
-                <div key={category} className="space-y-2">
-                  <h4 className="text-xs font-bold tracking-wider text-[var(--text-primary)] uppercase font-mono">
-                    {categoryNames[category]?.toUpperCase() || category.toUpperCase()}
-                  </h4>
-                <div className="flex flex-wrap gap-2">
-                  {list.map((skill) => (
-                    <div 
-                      key={skill.name} 
-                      title={skill.level}
-                      className="inline-flex flex-col items-start px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] cursor-default hover:border-[var(--accent)] transition-colors duration-200"
-                    >
-                      <span className="text-xs font-semibold text-[var(--text-primary)] font-mono">{skill.name}</span>
-                      <span className="text-[10px] text-[var(--text-secondary)] mt-0.5">{skill.level}</span>
+                <div 
+                  key={category} 
+                  className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/60 flex flex-col justify-between"
+                >
+                  <div>
+                    <h4 className="text-[11px] font-bold tracking-wider text-[var(--accent)] uppercase font-mono mb-2 pb-1.5 border-b border-[var(--border)]/40 flex items-center justify-between">
+                      <span>// {categoryNames[category] || category}</span>
+                      <span className="text-[9px] text-[var(--text-secondary)] font-mono opacity-80">{list.length}</span>
+                    </h4>
+                    <div className="space-y-1.5">
+                      {list.map((skill) => (
+                        <div 
+                          key={skill.name} 
+                          className="p-2 rounded-lg border border-[var(--border)]/40 bg-[var(--bg)] hover:border-[var(--accent)] transition-all duration-200"
+                        >
+                          <div className="text-xs font-semibold text-[var(--text-primary)] font-mono leading-none">
+                            {skill.name}
+                          </div>
+                          <div className="text-[10px] text-[var(--text-secondary)] font-sans mt-1 leading-tight">
+                            {skill.level}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
 
           </div>
         </div>
