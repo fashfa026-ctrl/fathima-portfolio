@@ -1,32 +1,35 @@
 export const skills = {
+  languages: [
+    { name: "Java", level: "OOP, Swing & Spring Boot applications" },
+    { name: "JavaScript", level: "Full-stack web logic, ES6+, async handling" },
+    { name: "PHP", level: "Server-side scripting, PDO & OOP architecture" },
+    { name: "C#", level: "Desktop applications, event-driven programming" }
+  ],
   frontend: [
-    { name: "React.js", level: "Core development, hooks, contexts" },
-    { name: "JavaScript (ES6+)", level: "DOM manipulation, asynchronous fetch APIs" },
-    { name: "Tailwind CSS", level: "Utility-first clean UI layouts" },
-    { name: "HTML5 & CSS3", level: "Semantic structure & responsive layouts" }
+    { name: "React", level: "Component lifecycle, state management & hooks" },
+    { name: "HTML5 & CSS3", level: "Semantic markup, modern styling & responsiveness" },
+    { name: "Tailwind CSS", level: "Utility-first design & custom design systems" }
   ],
   backend: [
-    { name: "Node.js & Express.js", level: "REST API routes, controllers, middleware" },
-    { name: "PHP", level: "Server-side scripting & session authentication" },
-    { name: "Java / C#", level: "OOP logic, interface systems" }
+    { name: "Node.js", level: "Runtime environment for server-side apps" },
+    { name: "Express.js", level: "RESTful APIs, routing & middleware authorization" }
+  ],
+  desktop: [
+    { name: "C# Windows Forms", level: "Desktop UI, POS workflows & receipt billing" },
+    { name: ".NET Framework", level: "Application runtime, event models & calculation logic" }
   ],
   database: [
-    { name: "MongoDB", level: "Mongoose ODM schemas & indexing" },
-    { name: "MySQL", level: "Relational tables, complex joins & database normalization" }
+    { name: "MongoDB", level: "NoSQL document collections, Mongoose ODM schemas" },
+    { name: "MySQL", level: "Relational database modeling, CRUD & normalized tables" }
   ],
   tools: [
-    { name: "Git & GitHub", level: "Version control & collaborative branch flows" },
-    { name: "VS Code", level: "Primary development workspace environment" },
-    { name: "Postman", level: "API testing & endpoint validation" },
-    { name: "NetBeans", level: "Java development" },
-    { name: "Visual Studio", level: "C# development" }
-  ],
-  deployment: [
-    { name: "Vercel", level: "Frontend & serverless deployment" }
-  ],
-  aiAssistedDevelopment: [
-    { name: "Claude AI", level: "Structured, phase-by-phase development workflow" },
-    { name: "ChatGPT", level: "Problem-solving & documentation support" },
-    { name: "Google Gemini", level: "Research & quick reference" }
+    { name: "Git & GitHub", level: "Version control & repository collaboration" },
+    { name: "Postman", level: "REST API testing & payload inspection" },
+    { name: "VS Code", level: "Modern web & script development environment" },
+    { name: "Cloudinary", level: "Cloud asset storage & image upload integration" },
+    { name: "Vercel", level: "Cloud deployment & production hosting" },
+    { name: "NetBeans", level: "Java development & desktop application builds" },
+    { name: "Microsoft Visual Studio 2015", level: "C# Windows Forms development & debugging" },
+    { name: "XAMPP", level: "Local Apache & MySQL server stack configuration" }
   ]
 };

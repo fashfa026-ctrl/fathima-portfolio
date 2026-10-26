@@ -5,7 +5,7 @@ import { Card } from './Card';
 import { GraduationCap, Check } from 'lucide-react';
 
 export const Timeline = () => {
-  const { education, certifications } = timeline;
+  const { education, schooling, certifications } = timeline;
 
   return (
     <section id="experience" className="py-16 border-t border-[var(--border)]">
@@ -53,6 +53,27 @@ export const Timeline = () => {
                 ))}
               </div>
             </div>
+
+            {/* Schooling / Earlier Education */}
+            {schooling && schooling.length > 0 && (
+              <div className="pt-4 border-t border-[var(--border)]/55 space-y-3">
+                <h5 className="text-xs font-bold font-mono uppercase text-[var(--text-primary)] tracking-wide">
+                  Academic Background
+                </h5>
+                <div className="space-y-3">
+                  {schooling.map((item, idx) => (
+                    <div key={idx} className="p-3 rounded-lg border border-[var(--border)] bg-[var(--bg)] space-y-1">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-bold text-[var(--text-primary)] font-sans">{item.level}</span>
+                        <span className="text-[10px] font-mono text-[var(--accent)] font-semibold">{item.year}</span>
+                      </div>
+                      <div className="text-xs text-[var(--text-secondary)]">{item.institution}</div>
+                      <div className="text-[11px] font-mono text-[var(--text-secondary)] pt-0.5">{item.results}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </Card>
         </div>
 

@@ -2,8 +2,8 @@ export const timeline = {
   education: {
     degree: "Higher National Diploma in Information Technology (HNDIT)",
     institution: "Sri Lanka Institute of Advanced Technological Education (SLIATE)",
-    campus: "Dehiwala Advanced Technological Institute",
-    status: "Expected Graduation • 2026",
+    campus: "Advanced Technological Institute, Dehiwala (SLIATE)",
+    status: "2024–2027 (Expected)",
     coursework: [
       "Object-Oriented Programming",
       "Database Systems",
@@ -12,6 +12,22 @@ export const timeline = {
       "Software Engineering"
     ]
   },
+  schooling: [
+    {
+      level: "G.C.E. Advanced Level",
+      year: "2022",
+      institution: "Kekunugolla National School, Kurunegala",
+      stream: "Combined Mathematics Stream",
+      results: "Maths: C | Physics: S | Chemistry: S"
+    },
+    {
+      level: "G.C.E. Ordinary Level",
+      year: "2019",
+      institution: "Enasal Golla Central College",
+      stream: "Secondary Education",
+      results: "6A, 3B (English: A, Maths: A)"
+    }
+  ],
   certifications: [
     {
       id: "cert-js",

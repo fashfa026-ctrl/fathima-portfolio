@@ -18,7 +18,7 @@ export const About = () => {
               Coursework introduced me to the rules of object-oriented programming in Java and C#, as well as building relational database applications with MySQL. This academic grounding taught me to structure objects cleanly and model normalised databases.
             </p>
             <p>
-              I transitioned to full-stack Javascript (MERN) to build complete web products. Through my final-year project, I learned to design REST API endpoints, validate request payloads, model document relations, and manage application states. I am looking for a software development internship to apply my engineering foundations.
+              I transitioned to full-stack JavaScript (MERN) and desktop solutions to build complete software products. Through my academic and personal projects, I learned to design REST API endpoints, validate request payloads, model relational and document databases, and build desktop billing applications. I am actively seeking an industrial training opportunity to apply my engineering foundations.
             </p>
           </div>
         </div>
@@ -31,12 +31,12 @@ export const About = () => {
             {/* Skill categories */}
             {Object.entries(skills).map(([category, list]) => {
               const categoryNames = {
+                languages: "Programming Languages",
                 frontend: "Frontend",
                 backend: "Backend",
-                database: "Database",
-                tools: "Tools",
-                deployment: "Deployment",
-                aiAssistedDevelopment: "AI-Assisted Development"
+                desktop: "Desktop Development",
+                database: "Databases",
+                tools: "Tools & Technologies"
               };
               return (
                 <div key={category} className="space-y-2">

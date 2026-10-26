@@ -42,7 +42,7 @@ export const Hero = () => {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="mt-6 text-base md:text-lg text-[var(--text-secondary)] max-w-xl leading-relaxed font-sans"
         >
-          Final-year HNDIT student passionate about building modern web applications using React, Node.js, Express.js, and MongoDB. Seeking a Software Engineering Internship to build scalable software and continue growing as a developer.
+          HNDIT student at SLIATE seeking an industrial training opportunity, with hands-on experience developing full-stack web applications and desktop software using React, Node.js, Express.js, MongoDB, PHP, Java, and .NET.
         </motion.p>
 
         {/* Action Row */}
@@ -56,7 +56,7 @@ export const Hero = () => {
             View CareerHub Case Study <ArrowRight size={16} />
           </Button>
 
-          <Button variant="secondary" href="/resume.pdf" download="Fathima_Ashfa_Resume.pdf">
+          <Button variant="secondary" href="/resume.pdf?v=2" download="Fathima_Ashfa_Resume.pdf">
             <FileText size={16} /> Download Resume
           </Button>
 

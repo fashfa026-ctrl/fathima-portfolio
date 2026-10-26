@@ -26,10 +26,10 @@ export const Contact = () => {
           <div className="space-y-6">
             <SectionTitle title="Get In Touch" eyebrow="Collaboration" className="mb-4" />
             <p className="text-base text-[var(--text-secondary)] leading-relaxed font-sans">
-              I am currently seeking a Software Engineering Internship where I can contribute to real-world projects, strengthen my technical skills, and continue learning from experienced developers.
+              I am currently seeking an industrial training opportunity where I can contribute to real-world projects, strengthen my technical skills, and continue learning from experienced developers.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
-              <Button variant="primary" href="/resume.pdf" download="Fathima_Ashfa_Resume.pdf">
+              <Button variant="primary" href="/resume.pdf?v=2" download="Fathima_Ashfa_Resume.pdf">
                 Download Resume
               </Button>
               <Button variant="secondary" href={`mailto:${contactInfo.email}`}>
