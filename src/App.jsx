@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 
@@ -18,22 +17,20 @@ const Loading = () => (
 
 function App() {
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="flex min-h-screen flex-col bg-[var(--bg)] text-[var(--text-primary)] transition-all duration-300">
-          <Header />
-          <main className="flex-grow">
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/case-study/:id" element={<CaseStudyDetail />} />
-              </Routes>
-            </Suspense>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </ThemeProvider>
+    <Router>
+      <div className="flex min-h-screen flex-col bg-[var(--bg)] text-[var(--text-primary)] transition-all duration-300">
+        <Header />
+        <main className="flex-grow">
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/case-study/:id" element={<CaseStudyDetail />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

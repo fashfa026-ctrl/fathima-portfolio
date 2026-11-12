@@ -18,13 +18,13 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="pt-16 pb-24 border-t border-[var(--border)]">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="contact" className="pt-20 pb-24 border-t border-[var(--border)]">
+      <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           
           {/* SECTION 3 - CONTACT (Left Column) */}
           <div className="space-y-6">
-            <SectionTitle title="Get In Touch" eyebrow="Collaboration" className="mb-4" />
+            <SectionTitle title="Let's Connect" eyebrow="Get In Touch" className="mb-4" />
             <p className="text-base text-[var(--text-secondary)] leading-relaxed font-sans">
               I am currently seeking an industrial training opportunity where I can contribute to real-world projects, strengthen my technical skills, and continue learning from experienced developers.
             </p>

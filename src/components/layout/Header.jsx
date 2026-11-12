@@ -1,122 +1,167 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
-import { contactInfo } from '../../data/contact';
+import { Menu, X, FileText } from 'lucide-react';
+
+const navLinks = [
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Certificates', id: 'certificates' },
+  { label: 'Contact', id: 'contact' },
+];
 
 export const Header = () => {
-  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  // Track scroll for header background opacity
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // IntersectionObserver — highlight active section in nav
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+
+    const observers = [];
+
+    const handleIntersect = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    // Small delay to ensure DOM is ready after lazy load
+    const timer = setTimeout(() => {
+      navLinks.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const observer = new IntersectionObserver(handleIntersect, {
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0,
+          });
+          observer.observe(el);
+          observers.push(observer);
+        }
+      });
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+      observers.forEach((o) => o.disconnect());
+    };
+  }, [location.pathname]);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
   const handleNavClick = (sectionId) => {
     setIsOpen(false);
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     if (location.pathname === '/') {
       const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const navLinks = [
-    { label: 'About', id: 'about' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Workflow', id: 'workflow' },
-    { label: 'Experience', id: 'experience' },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-md transition-all duration-300">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? 'bg-[var(--bg)]/90 backdrop-blur-xl border-b border-[var(--border)]'
+          : 'bg-[var(--bg)]/60 backdrop-blur-md'
+      }`}
+    >
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-sans text-xl font-bold tracking-tight text-[var(--text-primary)]"
+          className="text-xl font-bold tracking-tight text-[var(--text-primary)]"
+          style={{ fontFamily: 'var(--font-heading)' }}
         >
           Fathima Ashfa<span className="text-[var(--accent)]">.</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            location.pathname === '/' ? (
+        {/* Desktop Nav — center */}
+        <nav className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id && location.pathname === '/';
+
+            return location.pathname === '/' ? (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className="cursor-pointer text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className={`cursor-pointer relative px-3 py-2 text-sm font-medium transition-colors rounded-md ${
+                  isActive
+                    ? 'text-[var(--accent)]'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                }`}
               >
                 {link.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-[var(--accent)] rounded-full" />
+                )}
               </button>
             ) : (
               <Link
                 key={link.id}
                 to={`/#${link.id}`}
-                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className="px-3 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               >
                 {link.label}
               </Link>
-            )
-          ))}
-          
-          {/* Action Button */}
-          {location.pathname === '/' ? (
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="cursor-pointer inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg bg-[var(--text-primary)] text-[var(--bg)] hover:bg-[var(--accent)] hover:text-white transition-colors"
-            >
-              Get in touch
-            </button>
-          ) : (
-            <Link
-              to="/#contact"
-              className="inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg bg-[var(--text-primary)] text-[var(--bg)] hover:bg-[var(--accent)] hover:text-white transition-colors"
-            >
-              Get in touch
-            </Link>
-          )}
-
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="cursor-pointer p-2 rounded-lg border border-[var(--border)] text-[var(--text-primary)] hover:bg-[var(--bg-card)] transition-colors flex items-center justify-center"
-          >
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+            );
+          })}
         </nav>
 
-        {/* Mobile Nav Button */}
-        <div className="flex items-center gap-4 md:hidden">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="cursor-pointer p-2 rounded-lg border border-[var(--border)] text-[var(--text-primary)] hover:bg-[var(--bg-card)] transition-colors flex items-center justify-center"
+        {/* Right side */}
+        <div className="flex items-center gap-3">
+          <a
+            href="/resume.pdf?v=2"
+            download="Fathima_Ashfa_Resume.pdf"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-[var(--accent)] text-white hover:opacity-90 transition-opacity"
           >
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
-          
+            <FileText size={14} /> Resume
+          </a>
+
           <button
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
-            className="cursor-pointer text-[var(--text-primary)] hover:text-[var(--accent)] flex items-center justify-center"
+            className="cursor-pointer lg:hidden p-2 rounded-lg text-[var(--text-primary)] hover:text-[var(--accent)] hover:bg-[var(--bg-card)] transition-colors"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile full-screen overlay */}
       {isOpen && (
-        <div className="md:hidden border-b border-[var(--border)] bg-[var(--bg)] px-6 py-4 transition-all duration-300">
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+        <div className="lg:hidden fixed inset-0 top-[65px] bg-[var(--bg)]/98 backdrop-blur-2xl z-40">
+          <div className="flex flex-col p-6 gap-1">
+            {navLinks.map((link) =>
               location.pathname === '/' ? (
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  className="cursor-pointer text-left text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 border-b border-[var(--border)]/30"
+                  className={`cursor-pointer text-left text-lg font-medium py-3 px-4 rounded-xl transition-colors ${
+                    activeSection === link.id
+                      ? 'text-[var(--accent)] bg-[var(--accent-glow)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
+                  }`}
                 >
                   {link.label}
                 </button>
@@ -125,28 +170,19 @@ export const Header = () => {
                   key={link.id}
                   to={`/#${link.id}`}
                   onClick={() => setIsOpen(false)}
-                  className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-2 border-b border-[var(--border)]/30"
+                  className="text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-3 px-4 rounded-xl hover:bg-[var(--bg-card)] transition-colors"
                 >
                   {link.label}
                 </Link>
               )
-            ))}
-            {location.pathname === '/' ? (
-              <button
-                onClick={() => { handleNavClick('contact'); setIsOpen(false); }}
-                className="cursor-pointer inline-flex w-full items-center justify-center px-4 py-2.5 text-sm font-semibold rounded-lg bg-[var(--text-primary)] text-[var(--bg)] hover:bg-[var(--accent)] hover:text-white transition-colors"
-              >
-                Get in touch
-              </button>
-            ) : (
-              <Link
-                to="/#contact"
-                onClick={() => setIsOpen(false)}
-                className="inline-flex w-full items-center justify-center px-4 py-2.5 text-sm font-semibold rounded-lg bg-[var(--text-primary)] text-[var(--bg)] hover:bg-[var(--accent)] hover:text-white transition-colors"
-              >
-                Get in touch
-              </Link>
             )}
+            <a
+              href="/resume.pdf?v=2"
+              download="Fathima_Ashfa_Resume.pdf"
+              className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold rounded-xl bg-[var(--accent)] text-white hover:opacity-90 transition-opacity"
+            >
+              <FileText size={16} /> Download Resume
+            </a>
           </div>
         </div>
       )}

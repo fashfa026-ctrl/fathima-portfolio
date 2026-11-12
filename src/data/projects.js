@@ -1,89 +1,127 @@
 export const projects = [
   {
     id: "careerhub",
-    title: "CareerHub",
-    category: "Featured Product Case Study",
-    description: "A dual-sided recruitment platform connecting hiring managers and candidate applicants, built to streamline listing management and application lifecycles.",
+    title: "CareerHub – Job Portal",
+    category: "Full-Stack MERN Application",
+    description: "A full-stack job portal connecting Job Seekers, Employers, and Administrators on a single platform — with job posting, resume upload, interview scheduling, analytics dashboard, and OTP-based password reset. Deployed on Vercel with Cloudinary for media storage.",
     stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "JWT"],
-    status: "Completed flagship MERN project",
+    status: "Completed — HNDIT4052 Individual Project",
     isCompleted: true,
     github: "https://github.com/fashfa026-ctrl/jobportal",
     demo: "https://jobportal-5b93.vercel.app/",
+    thumbnail: "/screenshots/careerhub/Home.jpg",
+    images: [
+      "/screenshots/careerhub/Home.jpg",
+      "/screenshots/careerhub/Dashboard.jpg",
+      "/screenshots/careerhub/Signup.jpg",
+      "/screenshots/careerhub/Jobs page.jpg",
+      "/screenshots/careerhub/JobDetails.jpg",
+      "/screenshots/careerhub/ApplicantProfile.jpg",
+      "/screenshots/careerhub/JobSeekerProfile.jpg",
+      "/screenshots/careerhub/ManageJobs.jpg",
+      "/screenshots/careerhub/ForgotPassword.jpg",
+      "/screenshots/careerhub/Footer.jpg",
+    ],
+    video: null,
     role: "Full-Stack Developer",
-    scope: "Academic Project / Final-Year Build",
-    problem: "Recruiters struggle with fragmented pipelines, while applicants face a black-box experience with no visibility into their application tracking state.",
-    objective: "To construct a centralized portal that provides real-time application state synchronization and structured recruiters workflow tools.",
-    targetUsers: "Job seekers applying for positions, and hiring recruiters managing candidates.",
+    scope: "HNDIT4052 Individual Project — Final-Year Build",
+    problem: "Job seekers lack visibility into application status, employers struggle with managing applicants efficiently, and administrators have no centralized oversight of the platform.",
+    objective: "To build a tri-role job portal with real-time application tracking, employer analytics, interview scheduling, and admin controls — deployed on Vercel with cloud media storage.",
+    targetUsers: "Job Seekers applying for positions, Employers posting and managing jobs, and Administrators overseeing the platform.",
     techDetails: {
-      frontend: ["React.js (SPA)", "Context API for global state", "Tailwind CSS", "Framer Motion"],
-      backend: ["Node.js", "Express.js REST framework", "JSON Web Token (JWT) auth middleware"],
-      database: ["MongoDB", "Mongoose ODM schemas & indexing"],
-      tools: ["Git & GitHub", "Postman API testing client", "npm package manager"]
+      frontend: ["React 19 (Vite 8)", "Tailwind CSS v4", "Framer Motion", "React Router DOM 7", "AuthContext / ThemeContext / FilterContext"],
+      backend: ["Node.js (≥18)", "Express 5", "JWT Auth", "Bcrypt.js", "Multer", "Nodemailer (OTP email)"],
+      database: ["MongoDB via Mongoose 9", "Models: User, Job, Application, Analytics, Feedback, Report, SavedJob"],
+      tools: ["Cloudinary (avatars, logos, resumes)", "Vercel (frontend + backend deployment)", "Git & GitHub"]
     },
     features: [
       {
-        title: "Role-Based Routing",
-        description: "Enforces strict route permissions on the frontend and backend, serving separate views and controller access for candidates and recruiters."
+        title: "Three-Role Access System",
+        description: "Separate dashboards and protected routes for Job Seekers, Employers, and Administrators — enforced on both frontend (ProtectedRoute) and backend (authMiddleware)."
       },
       {
-        title: "Application Pipeline Tracker",
-        description: "Enables candidates to view current progress state (Applied, Interviewing, Rejected, Offered) dynamically updated by hiring managers."
+        title: "Interview Scheduling",
+        description: "Employers can schedule interviews with full details — type, date, location/meeting link, and contact — visible to applicants in their dashboard."
       },
       {
-        title: "Secure Sessions",
-        description: "Enforces authorization checking on requests using token signatures."
+        title: "Employer Analytics Dashboard",
+        description: "Tracks total jobs posted, applications received, hires, and individual job view counts to help employers measure listing performance."
+      },
+      {
+        title: "OTP-Based Password Reset",
+        description: "Secure email-based OTP flow via Nodemailer — no URL token links required, more user-friendly and phishing-resistant."
+      },
+      {
+        title: "Cloudinary Media Storage",
+        description: "User avatars, company logos, and PDF resumes are stored on Cloudinary — persistent across serverless Vercel deployments."
+      },
+      {
+        title: "Admin System Control",
+        description: "Administrators can block/unblock users (cascade-safe), manage all jobs and applications, handle feedback, and generate platform-wide reports."
       }
     ],
     architecture: {
-      client: "React SPA dispatching async fetch requests with session tokens.",
-      server: "Express.js REST API router processing tokens, validating inputs, and returning JSON payloads.",
-      database: "MongoDB Atlas holding collections for users, listings, and applications."
+      client: "React 19 SPA (Vite 8) with role-based routing, three context providers (Auth, Theme, Filter), and Framer Motion page animations.",
+      server: "Express 5 REST API with JWT middleware, Multer/Cloudinary upload pipeline, Nodemailer OTP, and modular controller-route architecture.",
+      database: "MongoDB via Mongoose 9 — 7 models: User, Job, Application, Analytics, Feedback, Report, SavedJob. Soft-delete on Jobs preserves application history."
     },
     dbDesign: [
       {
-        name: "Users Collection",
-        description: "Holds candidate and recruiter accounts.",
-        fields: ["_id (ObjectID)", "name (String)", "email (String, unique)", "password (Hashed String)", "role (String: candidate | recruiter)"]
+        name: "User Model",
+        description: "Handles all three roles with shared schema — role field determines access.",
+        fields: ["fullName", "email", "password (bcrypt)", "role (jobseeker | employer | admin)", "avatar", "resume", "companyName", "companyLogo", "isBlocked", "resetPasswordOTP"]
       },
       {
-        name: "Jobs Collection",
-        description: "Holds recruitment vacancy listings.",
-        fields: ["_id (ObjectID)", "title (String)", "description (String)", "requirements (Array)", "recruiterId (Ref -> Users)", "status (String: open | closed)"]
+        name: "Job Model",
+        description: "Employer job listings with soft-delete to preserve application history.",
+        fields: ["title", "description", "requirements[]", "location", "category", "type (Full-Time | Part-Time | Internship | Remote | Contract)", "salaryMin/Max", "deadline", "experience", "isClosed", "isDeleted", "views", "applicationCount"]
       },
       {
-        name: "Applications Collection",
-        description: "Stores candidate listings matching logs.",
-        fields: ["_id (ObjectID)", "jobId (Ref -> Jobs)", "candidateId (Ref -> Users)", "status (String: Applied | Interviewing | Closed)", "appliedAt (Date)"]
+        name: "Application Model",
+        description: "Tracks each job seeker's application lifecycle including interview details.",
+        fields: ["applicant (→ User)", "job (→ Job)", "resume", "status (applied | in review | accepted | rejected)", "interviewDetails (title, type, date, schedule, contact, meetingLink)"]
+      },
+      {
+        name: "Analytics Model",
+        description: "Employer-level aggregated statistics.",
+        fields: ["employer (→ User)", "totalJobsPosted", "totalApplicationsReceived", "totalHired"]
       }
     ],
     challenges: [
       {
-        challenge: "XSS Session Token Protection",
-        solution: "Configured Express server controllers to set JWT auth tokens inside HttpOnly, Secure, SameSite cookies, blocking client scripts from intercepting them."
+        challenge: "Persistent Media on Serverless Deployment",
+        solution: "Integrated Cloudinary via multer-storage-cloudinary to store all uploads in the cloud. The server auto-creates a /tmp uploads directory on Vercel startup as a fallback."
       },
       {
-        challenge: "Read Performance Latency under Load",
-        solution: "Created Mongoose compound indexes on jobId and candidateId schemas, significantly reducing MongoDB lookup execution times."
+        challenge: "Cascade Delete on User Removal",
+        solution: "Implemented cascade deletion logic so removing a user also cleans up all their applications, saved jobs, and posted jobs — maintaining database integrity."
+      },
+      {
+        challenge: "Soft-Delete for Jobs",
+        solution: "Jobs use an isDeleted flag instead of hard deletion, preserving application history records even after a job is removed — following LinkedIn/Indeed patterns."
       }
     ],
     outcomeTitle: "Project Outcome",
     outcome: [
-      "Successfully developed a dual-role recruitment dashboard.",
-      "Implemented JWT session authorization via secure HttpOnly cookies.",
-      "Optimized read latencies using compound database indices.",
-      "Practiced responsive full-stack component synchronization."
+      "Built a production-deployed tri-role job portal with Job Seeker, Employer, and Admin dashboards.",
+      "Implemented OTP-based password reset via Nodemailer and Cloudinary for persistent media storage on Vercel.",
+      "Engineered interview scheduling, employer analytics, soft-delete job management, and cascade user deletion.",
+      "Deployed full-stack application on Vercel with environment-based configuration for production."
     ]
   },
   {
     id: "hotel",
-    title: "Hotel Management System Modernization",
-    category: "Modernization Case Study",
-    description: "A comprehensive migration of a legacy Java Swing desktop application into a decoupled Spring Boot web application using JPA and an embedded database.",
-    stack: ["Spring Boot", "Spring Data JPA", "Java", "H2 Database", "REST API"],
+    title: "Hotel Management System",
+    category: "Legacy Modernization Project",
+    description: "Migration of a legacy Java Swing desktop app into a decoupled Spring Boot web application with REST API, JPA, and embedded H2 database.",
+    stack: ["Spring Boot", "Java", "Spring Data JPA", "H2 Database", "REST API"],
     status: "Completed academic desktop project",
     isCompleted: true,
     github: "https://github.com/fashfa026-ctrl",
     demo: null,
+    thumbnail: null,
+    images: [],
+    video: null,
     role: "Sole Developer",
     scope: "Legacy Desktop to Web Migration Project",
     problem: "Legacy Swing client suffered from absolute path dependency issues, NullPointerException failures on resource loads, and required heavy manual SQL setup.",
@@ -155,14 +193,22 @@ export const projects = [
   },
   {
     id: "icecream",
-    title: "Ice Cream Shop Web Application",
-    category: "Coursework Web App",
-    description: "A multi-page e-commerce web application featuring dedicated portals for customers to browse products and administrators to manage inventory and workflows.",
-    stack: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "XAMPP"],
+    title: "Ice Cream Shop Web App",
+    category: "Coursework Web Application",
+    description: "A multi-page e-commerce web app with customer browsing portal and admin inventory management, with secured authentication and file upload defense.",
+    stack: ["PHP", "MySQL", "HTML5", "CSS3", "JavaScript", "XAMPP"],
     status: "Completed coursework project",
     isCompleted: true,
     github: "https://github.com/fashfa026-ctrl",
     demo: null,
+    thumbnail: "/screenshots/ice-cream/HomeSection.jpg",
+    images: [
+      "/screenshots/ice-cream/HomeSection.jpg",
+      "/screenshots/ice-cream/AboutUs.jpg",
+      "/screenshots/ice-cream/Contact.jpg",
+      "/screenshots/ice-cream/Subscribe.jpg",
+    ],
+    video: null,
     role: "Sole Developer",
     scope: "Academic Coursework Refactoring & Build",
     problem: "The legacy codebase contained plaintext MD5 authentication, lack of file upload validation, hardcoded server paths (C:\\xampp\\htdocs\\...), and critical database bugs.",
@@ -233,14 +279,20 @@ export const projects = [
   },
   {
     id: "fastfood-pos",
-    title: "Food Frenzy – Fast Food Restaurant POS and Billing Application",
+    title: "Food Frenzy – POS System",
     category: "Desktop POS Application",
-    description: "A desktop-based Point of Sale (POS) and automated billing management system developed with C# Windows Forms and .NET Framework to streamline order billing through categorized menu selection, automated change calculation, and receipt generation.",
-    stack: ["C#", ".NET Framework", "Windows Forms", "Microsoft Visual Studio 2015"],
+    description: "A C# Windows Forms desktop POS and billing application for fast-food restaurants with dynamic menu pricing, quantity selection, and automated change calculation.",
+    stack: ["C#", ".NET Framework", "Visual Studio"],
     status: "Completed C# desktop project",
     isCompleted: true,
     github: "https://github.com/fashfa026-ctrl",
     demo: null,
+    thumbnail: "/screenshots/food-frenzy/home.jpeg",
+    images: [
+      "/screenshots/food-frenzy/home.jpeg",
+      "/screenshots/food-frenzy/Final.jpeg",
+    ],
+    video: "/videos/Food_Frenzy_UI_only (1).out.mp4",
     role: "Sole Developer",
     scope: "Desktop POS & Billing Management Application",
     problem: "Manual order calculations and cash change estimation in fast-food outlets lead to checkout delays, pricing errors, and cash flow calculation discrepancies during busy business hours.",
@@ -303,6 +355,108 @@ export const projects = [
       "Implemented event-driven business logic for itemized pricing across multiple categories (mains, beverages, sides) supporting dynamic quantity selection.",
       "Engineered an automated cash balance estimation algorithm to streamline checkout workflows and eliminate manual mathematical errors.",
       "Designed a user-friendly UI layout using custom containers, data controls, and resources within Visual Studio 2015."
+    ]
+  },
+  {
+    id: "fish-flora-hub",
+    title: "Fish & Flora Hub",
+    category: "Multi-Page E-Commerce Website",
+    description: "A complete aquarium e-commerce and educational showcase website with 8 pages — fish/plant/accessories catalogs, interactive fish match quiz, cart with localStorage, wishlist, and order simulation. Built with zero external frameworks.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    status: "Completed",
+    isCompleted: true,
+    github: "https://github.com/fashfa026-ctrl",
+    demo: null,
+    thumbnail: "/screenshots/Fish&Flora-Hub/Home.jpg",
+    images: [
+      "/screenshots/Fish&Flora-Hub/Home.jpg",
+      "/screenshots/Fish&Flora-Hub/Explore.jpg",
+      "/screenshots/Fish&Flora-Hub/Fish.jpg",
+      "/screenshots/Fish&Flora-Hub/Plants.jpg",
+      "/screenshots/Fish&Flora-Hub/Accessories.jpg",
+      "/screenshots/Fish&Flora-Hub/Cart.jpg",
+      "/screenshots/Fish&Flora-Hub/Wishlist.jpg",
+      "/screenshots/Fish&Flora-Hub/Quiz.jpg",
+      "/screenshots/Fish&Flora-Hub/Contact.jpg",
+    ],
+    video: "/videos/fish_flora_hub_demo_1.2x_smooth-3[1].out.mp4",
+  },
+  {
+    id: "spotly",
+    title: "Spotly – Ride Sharing App",
+    category: "MERN Stack Application",
+    description: "A ride-sharing application connecting passengers with drivers offering available seats, featuring role-based dashboards and ride booking management.",
+    stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    status: "In Progress",
+    isCompleted: false,
+    github: "https://github.com/fashfa026-ctrl",
+    demo: null,
+    thumbnail: null,
+    images: [],
+    video: null,
+    role: "Full-Stack Developer",
+    scope: "Academic Project / Personal Build",
+    problem: "Commuters lack a convenient platform to find and share rides with drivers who have available seats, leading to inefficient transportation and higher travel costs.",
+    objective: "To build a ride-sharing platform that connects passengers with drivers through an intuitive booking and ride management system.",
+    targetUsers: "Passengers looking for shared rides and drivers offering available seats.",
+    techDetails: {
+      frontend: ["React.js (Vite)", "Tailwind CSS", "Responsive UI Components"],
+      backend: ["Node.js", "Express.js REST API", "Authentication Middleware"],
+      database: ["MongoDB", "Mongoose ODM"],
+      tools: ["Git & GitHub", "Postman API Testing", "VS Code"]
+    },
+    features: [
+      {
+        title: "Passenger & Driver Dashboards",
+        description: "Separate dashboard interfaces for passengers to search rides and drivers to manage their available journeys."
+      },
+      {
+        title: "Ride Search & Booking",
+        description: "Passengers can search for available rides by route and book seats with drivers."
+      },
+      {
+        title: "Ride Management",
+        description: "Drivers can create, update, and manage ride listings including route details and available seats."
+      }
+    ],
+    architecture: {
+      client: "React SPA built with Vite, featuring separate passenger and driver views.",
+      server: "Express.js REST API handling ride CRUD operations and user authentication.",
+      database: "MongoDB storing user profiles, ride listings, and booking records."
+    },
+    dbDesign: [
+      {
+        name: "Users Collection",
+        description: "Stores passenger and driver account details.",
+        fields: ["_id (ObjectID)", "name (String)", "email (String)", "password (Hashed)", "role (passenger | driver)"]
+      },
+      {
+        name: "Rides Collection",
+        description: "Manages ride listings created by drivers.",
+        fields: ["_id (ObjectID)", "driverId (Ref -> Users)", "origin (String)", "destination (String)", "availableSeats (Number)", "departureTime (Date)"]
+      },
+      {
+        name: "Bookings Collection",
+        description: "Tracks ride bookings made by passengers.",
+        fields: ["_id (ObjectID)", "rideId (Ref -> Rides)", "passengerId (Ref -> Users)", "status (String)", "bookedAt (Date)"]
+      }
+    ],
+    challenges: [
+      {
+        challenge: "Real-Time Seat Availability",
+        solution: "Implemented seat count validation on both frontend and backend to prevent overbooking when multiple passengers attempt to book simultaneously."
+      },
+      {
+        challenge: "Dual-Role User Interface",
+        solution: "Designed separate dashboard layouts and navigation flows for passengers and drivers while sharing common authentication logic."
+      }
+    ],
+    outcomeTitle: "Current Progress",
+    outcome: [
+      "Developing a MERN stack ride-sharing application with separate passenger and driver interfaces.",
+      "Implementing ride search, booking, and management functionalities.",
+      "Building responsive UI components with React and Tailwind CSS.",
+      "Project is actively in development with core features being implemented."
     ]
   }
 ];

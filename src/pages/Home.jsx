@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Hero } from '../sections/Hero';
 import { About } from '../sections/About';
-import { Highlights } from '../components/ui/Highlights';
+import { SkillsSection } from '../sections/SkillsSection';
 import { ProjectsList } from '../sections/ProjectsList';
+import { CertificatesSection } from '../sections/CertificatesSection';
 import { Workflow } from '../components/ui/Workflow';
-import { Timeline } from '../components/ui/Timeline';
+import { EducationSection } from '../sections/EducationSection';
 import { Contact } from '../sections/Contact';
 
 export default function Home() {
@@ -28,10 +29,11 @@ export default function Home() {
     <div className="dot-grid min-h-screen">
       <Hero />
       <About />
-      <Highlights />
+      <SkillsSection />
       <ProjectsList />
+      <CertificatesSection />
       <Workflow />
-      <Timeline />
+      <EducationSection />
       <Contact />
     </div>
   );
