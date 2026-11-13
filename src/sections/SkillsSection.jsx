@@ -39,7 +39,7 @@ const tagVariant = {
 
 export const SkillsSection = () => {
   return (
-    <section id="skills" className="py-20 border-t border-[var(--border)]">
+    <section id="skills" className="py-20 border-t border-[var(--border)] scroll-mt-20 md:scroll-mt-24">
       <div className="max-w-6xl mx-auto px-6">
         <SectionTitle title="Technical Skills" eyebrow="Technologies" />
 

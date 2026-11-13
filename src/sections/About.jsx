@@ -22,7 +22,7 @@ const textItem = {
 
 export const About = () => {
   return (
-    <section id="about" className="py-20 md:py-24 border-t border-[var(--border)] relative overflow-hidden">
+    <section id="about" className="py-20 md:py-24 border-t border-[var(--border)] relative overflow-hidden scroll-mt-20 md:scroll-mt-24">
       {/* Subtle ambient light */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-80 h-80 rounded-full bg-[var(--accent)]/[0.04] blur-[100px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-72 h-72 rounded-full bg-[#8B5CF6]/[0.03] blur-[100px] pointer-events-none" />

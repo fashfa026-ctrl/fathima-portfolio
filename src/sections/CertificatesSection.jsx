@@ -19,7 +19,7 @@ export const CertificatesSection = () => {
   const [lightboxImage, setLightboxImage] = useState(null);
 
   return (
-    <section id="certificates" className="py-20 border-t border-[var(--border)]">
+    <section id="certificates" className="py-20 border-t border-[var(--border)] scroll-mt-20 md:scroll-mt-24">
       <div className="max-w-6xl mx-auto px-6">
         <SectionTitle title="Certificates" eyebrow="Credentials" />
 
